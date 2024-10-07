@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date Confirmed!</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Georgia", serif;
+      }
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff0f5; /* Light pink background */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(219, 112, 147, 0.2);
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+      }
+      h1 {
+        color: #db7093;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #555;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+      .heart {
+        color: red;
+        font-size: 24px;
+      }
+      #dateDetails {
+        text-align: left;
+        margin-top: 20px;
+      }
+      .detail {
+        margin-bottom: 10px;
+      }
+      .label {
+        font-weight: bold;
+        color: #db7093;
+      }
+    </style>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <div class="container">
+      <h1>Date Confirmed! <span class="heart">&hearts;</span></h1>
+      <p>Thank you for planning this special date with me!</p>
+      <p>I'm looking forward to our time together.</p>
+      <p>I'll see you soon!</p>
+      <div id="dateDetails"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      // Initialize EmailJS
+      (function () {
+        emailjs.init("PuE-PSIO4jTAopHtw");
+      })();
+
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ff69b4" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: false },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ff69b4",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      function displayDateDetails() {
+        const date = localStorage.getItem("selectedDate");
+        const time = localStorage.getItem("selectedTime");
+        const location = localStorage.getItem("selectedLocation");
+        const reason = localStorage.getItem("locationReason");
+
+        const dateDetails = document.getElementById("dateDetails");
+        dateDetails.innerHTML = `
+          <div class="detail"><span class="label">Date:</span> ${date}</div>
+          <div class="detail"><span class="label">Time:</span> ${time}</div>
+          <div class="detail"><span class="label">Location:</span> ${location}</div>
+          <div class="detail"><span class="label">Reason:</span> ${reason}</div>
+        `;
+
+        // Send email using EmailJS
+        emailjs
+          .send("service_opkxqoh", "template_050zdba", {
+            date: date,
+            time: time,
+            location: location,
+            reason: reason,
+          })
+          .then(
+            function (response) {
+              console.log("Email sent successfully", response);
+            },
+            function (error) {
+              console.log("Failed to send email", error);
+            }
+          );
+
+        // Clear localStorage after displaying the details
+        localStorage.clear();
+      }
+
+      // Display the date details when the page loads
+      window.onload = displayDateDetails;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Date Location</title>
+    <style>
+      body,
+      html {
+        font-family: "Georgia", serif;
+        background-color: #fff0f5; /* Light pink background */
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff0f5;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #ffffff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(219, 112, 147, 0.2); /* Soft pink shadow */
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        z-index: 1;
+      }
+      h1 {
+        color: #db7093; /* Pink color */
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #555;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+      input[type="text"],
+      textarea {
+        width: calc(100% - 24px);
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid #ff69b4;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #ff69b4; /* Hot pink */
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 5px #db7093;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+      }
+      .button:hover {
+        background-color: #ff1493; /* Deeper pink on hover */
+      }
+      .button:active {
+        background-color: #ff1493;
+        box-shadow: 0 2px #db7093;
+        transform: translateY(4px);
+      }
+      #reasonSection {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <div class="container">
+      <h1>Select Date Location</h1>
+      <form id="locationForm">
+        <div id="locationSection">
+          <p>Where would you like to go for our date?</p>
+          <input
+            type="text"
+            id="locationInput"
+            placeholder="Enter a location or interest"
+            required
+          />
+          <button type="button" class="button" onclick="showReasonSection()">
+            Next
+          </button>
+        </div>
+        <div id="reasonSection">
+          <p>Why do you want to go to this place?</p>
+          <textarea
+            id="reasonInput"
+            placeholder="Tell me more about why you chose this place..."
+            required
+          ></textarea>
+          <button type="submit" class="button">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ff69b4" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: false },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ff69b4",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      function showReasonSection() {
+        const location = document.getElementById("locationInput").value;
+        if (location.trim() !== "") {
+          document.getElementById("locationSection").style.display = "none";
+          document.getElementById("reasonSection").style.display = "block";
+        } else {
+          alert("Please enter a location or interest.");
+        }
+      }
+
+      document
+        .getElementById("locationForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const location = document.getElementById("locationInput").value;
+          const reason = document.getElementById("reasonInput").value;
+          localStorage.setItem("selectedLocation", location);
+          localStorage.setItem("locationReason", reason);
+          window.location.href = "order-summary.html";
+        });
+    </script>
+  </body>
+</html>

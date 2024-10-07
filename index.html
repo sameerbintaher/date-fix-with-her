@@ -1,0 +1,158 @@
+<!-- i want to make a website for my girlfriend where there will be several pages,
+1st page will ask whether she is free for a date, there will be a yes or no button,
+if she is free there will be a 2nd page which will have a calendar to select the date and time,
+after selection of date and time there will be a 3rd page which will have all the places i want to take her,
+after selection of date and time and place there will be a 4th page which will have food menu which she can select,
+
+then there will be a complete order summary page which will have all the details which she selected,
+and there will be a confirmation button,
+on clicking the confirmation button there will be a 5th page where all information will be submitted and sent to my email.
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Special Invitation</title>
+
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Georgia", serif;
+      }
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff0f5; /* Light pink background */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(219, 112, 147, 0.2);
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+      }
+      h1 {
+        color: #db7093; /* Pink color */
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #555;
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+      .button-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #ff69b4; /* Hot pink */
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 5px #db7093;
+        transition: all 0.3s ease;
+      }
+      .button:hover {
+        background-color: #ff1493; /* Deeper pink on hover */
+      }
+      .button:active {
+        background-color: #ff1493;
+        box-shadow: 0 2px #db7093;
+        transform: translateY(4px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <div class="container">
+      <h1>A Special Invitation</h1>
+      <p>
+        My dearest, I have a question for you that I hope will brighten your
+        day. Would you do me the honor of joining me for a special date?
+      </p>
+      <div class="button-container">
+        <button class="button" onclick="location.href='date-picker.html'">
+          I'd Love To
+        </button>
+        <button class="button" onclick="declineInvitation()">
+          Not This Time
+        </button>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ff69b4" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: false },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ff69b4",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      function declineInvitation() {
+        alert("Perhaps another time. Have a wonderful day!");
+        setTimeout(function () {
+          window.close();
+        }, 1000); // Close the window after 1 second
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Date Summary</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Georgia", serif;
+      }
+      #particles-js {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: #fff0f5; /* Light pink background */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(219, 112, 147, 0.2);
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+      }
+      h1 {
+        color: #db7093;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+      .summary {
+        text-align: left;
+        margin-bottom: 30px;
+      }
+      .detail {
+        margin-bottom: 10px;
+      }
+      .label {
+        font-weight: bold;
+        color: #db7093;
+      }
+      .button {
+        display: inline-block;
+        padding: 12px 24px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #ff69b4;
+        border: none;
+        border-radius: 25px;
+        box-shadow: 0 5px #db7093;
+        transition: all 0.3s ease;
+      }
+      .button:hover {
+        background-color: #ff1493;
+      }
+      .button:active {
+        background-color: #ff1493;
+        box-shadow: 0 2px #db7093;
+        transform: translateY(4px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <div class="container">
+      <h1>Date Summary</h1>
+      <div class="summary" id="summary">
+        <!-- Summary details will be inserted here -->
+      </div>
+      <button onclick="confirmDate()" class="button">Confirm Date</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ff69b4" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: false },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ff69b4",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 6,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            repulse: { distance: 100, duration: 0.4 },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      function displaySummary() {
+        const summary = document.getElementById("summary");
+        const date = localStorage.getItem("selectedDate");
+        const time = localStorage.getItem("selectedTime");
+        const location = localStorage.getItem("selectedLocation");
+        const reason = localStorage.getItem("locationReason");
+
+        summary.innerHTML = `
+                <div class="detail"><span class="label">Date:</span> ${date}</div>
+                <div class="detail"><span class="label">Time:</span> ${time}</div>
+                <div class="detail"><span class="label">Location:</span> ${location}</div>
+                <div class="detail"><span class="label">Reason:</span> ${reason}</div>
+            `;
+      }
+
+      function confirmDate() {
+        // Redirect to the confirmation page
+        window.location.href = "confirmation.html";
+      }
+
+      // Display the summary when the page loads
+      window.onload = displaySummary;
+    </script>
+  </body>
+</html>

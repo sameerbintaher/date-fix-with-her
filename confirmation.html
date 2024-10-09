@@ -61,6 +61,18 @@
         font-weight: bold;
         color: #db7093;
       }
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #555;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+        z-index: 2;
+      }
     </style>
     <script
       type="text/javascript"
@@ -124,6 +136,7 @@
       });
 
       function displayDateDetails() {
+        const name = localStorage.getItem("selectedName");
         const date = localStorage.getItem("selectedDate");
         const time = localStorage.getItem("selectedTime");
         const location = localStorage.getItem("selectedLocation");
@@ -131,6 +144,7 @@
 
         const dateDetails = document.getElementById("dateDetails");
         dateDetails.innerHTML = `
+          <div class="detail"><span class="label">Name:</span> ${name}</div>
           <div class="detail"><span class="label">Date:</span> ${date}</div>
           <div class="detail"><span class="label">Time:</span> ${time}</div>
           <div class="detail"><span class="label">Location:</span> ${location}</div>
@@ -140,10 +154,14 @@
         // Send email using EmailJS
         emailjs
           .send("service_opkxqoh", "template_050zdba", {
+            to_name: name,
             date: date,
             time: time,
             location: location,
             reason: reason,
+            excitement_level: getExcitementLevel(),
+            date_tip: getRandomDateTip(),
+            fun_fact: getRandomFunFact(),
           })
           .then(
             function (response) {
@@ -158,8 +176,53 @@
         localStorage.clear();
       }
 
+      function getExcitementLevel() {
+        const levels = [
+          "I'm over the moon!",
+          "I can't wait!",
+          "This is going to be amazing!",
+          "I'm counting down the minutes!",
+          "My heart is doing backflips!",
+        ];
+        return levels[Math.floor(Math.random() * levels.length)];
+      }
+
+      function getRandomDateTip() {
+        const tips = [
+          "Remember to smile and be yourself!",
+          "A small compliment can go a long way.",
+          "Active listening is key to great conversation.",
+          "Don't forget to put your phone on silent!",
+          "Relax and enjoy the moment - you've got this!",
+        ];
+        return tips[Math.floor(Math.random() * tips.length)];
+      }
+
+      function getRandomFunFact() {
+        const facts = [
+          "Did you know? The first date in history was probably shared over a dinosaur leg!",
+          "Fun fact: In Japan, there's a matchmaking service that sets up dates based on blood types!",
+          "Interesting tidbit: The word 'date' comes from the Latin 'dare', meaning 'to give'.",
+          "Quirky info: In some cultures, spilling your drink on a date is considered good luck!",
+          "Random fact: The average person spends 2 weeks of their life kissing!",
+        ];
+        return facts[Math.floor(Math.random() * facts.length)];
+      }
+
       // Display the date details when the page loads
       window.onload = displayDateDetails;
+    </script>
+    <footer>
+      <p>
+        Crafted with ❤️ and ☕️ by Sameer | ©
+        <span id="currentYear"></span> Date Fix With Her
+        <br />
+        All rights reserved | Unauthorized replication is a no-no 🚫
+      </p>
+    </footer>
+    <script>
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
     </script>
   </body>
 </html>

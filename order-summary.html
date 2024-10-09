@@ -40,6 +40,11 @@
         font-size: 28px;
         margin-bottom: 20px;
       }
+      #dateInfo {
+        color: #db7093;
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
       .summary {
         text-align: left;
         margin-bottom: 30px;
@@ -73,6 +78,18 @@
         background-color: #ff1493;
         box-shadow: 0 2px #db7093;
         transform: translateY(4px);
+      }
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #555;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+        z-index: 2;
       }
     </style>
   </head>
@@ -129,12 +146,17 @@
 
       function displaySummary() {
         const summary = document.getElementById("summary");
+        const name = localStorage.getItem("selectedName");
         const date = localStorage.getItem("selectedDate");
         const time = localStorage.getItem("selectedTime");
         const location = localStorage.getItem("selectedLocation");
         const reason = localStorage.getItem("locationReason");
 
         summary.innerHTML = `
+        <h1>Hi, <span class="heart">&hearts;</span> the most beautiful name in the world ${name}, your romantic rendezvous awaits!</h1>
+        <p>Get ready for a magical evening filled with love, laughter, and unforgettable moments.</p>
+        <p>Your heart's desire has been confirmed, and we can't wait to see the sparks fly!</p>
+                <p id="dateInfo">Here is the more info about this special date:</p>
                 <div class="detail"><span class="label">Date:</span> ${date}</div>
                 <div class="detail"><span class="label">Time:</span> ${time}</div>
                 <div class="detail"><span class="label">Location:</span> ${location}</div>
@@ -149,6 +171,19 @@
 
       // Display the summary when the page loads
       window.onload = displaySummary;
+    </script>
+
+    <footer>
+      <p>
+        Crafted with ❤️ and ☕️ by Sameer | ©
+        <span id="currentYear"></span> Date Fix With Her
+        <br />
+        All rights reserved | Unauthorized replication is a no-no 🚫
+      </p>
+    </footer>
+    <script>
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
     </script>
   </body>
 </html>

@@ -88,6 +88,18 @@
       #reasonSection {
         display: none;
       }
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #555;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+        z-index: 2;
+      }
     </style>
   </head>
   <body>
@@ -180,6 +192,19 @@
           localStorage.setItem("locationReason", reason);
           window.location.href = "order-summary.html";
         });
+    </script>
+
+    <footer>
+      <p>
+        Crafted with ❤️ and ☕️ by Sameer | ©
+        <span id="currentYear"></span> Date Fix With Her
+        <br />
+        All rights reserved | Unauthorized replication is a no-no 🚫
+      </p>
+    </footer>
+    <script>
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
     </script>
   </body>
 </html>

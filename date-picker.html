@@ -140,6 +140,18 @@
           font-size: 14px;
         }
       }
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #555;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+        z-index: 2;
+      }
 
       @media screen and (max-width: 400px) {
         h1 {
@@ -160,8 +172,16 @@
     <div id="particles-js"></div>
     <div class="container">
       <h1>Select Date and Time</h1>
-      <p>Please choose a day and time for our special date.</p>
+      <p>
+        Please enter your name and choose a day and time for our special date.
+      </p>
       <form id="dateTimeForm">
+        <input
+          type="text"
+          id="nameInput"
+          placeholder="Enter your beautiful name"
+          required
+        />
         <input
           type="text"
           id="dateInput"
@@ -229,12 +249,26 @@
         .getElementById("dateTimeForm")
         .addEventListener("submit", function (e) {
           e.preventDefault();
+          const name = document.getElementById("nameInput").value;
           const date = document.getElementById("dateInput").value;
           const time = document.getElementById("timeInput").value;
+          localStorage.setItem("selectedName", name);
           localStorage.setItem("selectedDate", date);
           localStorage.setItem("selectedTime", time);
           window.location.href = "location-select.html";
         });
+    </script>
+    <footer>
+      <p>
+        Crafted with ❤️ and ☕️ by Sameer | ©
+        <span id="currentYear"></span> Date Fix With Her
+        <br />
+        All rights reserved | Unauthorized replication is a no-no 🚫
+      </p>
+    </footer>
+    <script>
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
     </script>
   </body>
 </html>

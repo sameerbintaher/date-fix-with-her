@@ -1,14 +1,3 @@
-<!-- i want to make a website for my girlfriend where there will be several pages,
-1st page will ask whether she is free for a date, there will be a yes or no button,
-if she is free there will be a 2nd page which will have a calendar to select the date and time,
-after selection of date and time there will be a 3rd page which will have all the places i want to take her,
-after selection of date and time and place there will be a 4th page which will have food menu which she can select,
-
-then there will be a complete order summary page which will have all the details which she selected,
-and there will be a confirmation button,
-on clicking the confirmation button there will be a 5th page where all information will be submitted and sent to my email.
- -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,7 +16,7 @@ on clicking the confirmation button there will be a 5th page where all informati
       #particles-js {
         position: absolute;
         width: 100%;
-        height: 100%;
+        height: calc(100% - 60px); /* Adjust based on your footer height */
         background-color: #fff0f5; /* Light pink background */
         background-repeat: no-repeat;
         background-size: cover;
@@ -46,6 +35,7 @@ on clicking the confirmation button there will be a 5th page where all informati
         max-width: 500px;
         width: 90%;
         text-align: center;
+        margin-bottom: 80px; /* Increase this value if needed */
       }
       h1 {
         color: #db7093; /* Pink color */
@@ -85,6 +75,18 @@ on clicking the confirmation button there will be a 5th page where all informati
         background-color: #ff1493;
         box-shadow: 0 2px #db7093;
         transform: translateY(4px);
+      }
+      footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #555;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 14px;
+        z-index: 2;
       }
     </style>
   </head>
@@ -153,6 +155,18 @@ on clicking the confirmation button there will be a 5th page where all informati
           window.close();
         }, 1000); // Close the window after 1 second
       }
+    </script>
+    <footer>
+      <p>
+        Crafted with ❤️ and ☕️ by Sameer | ©
+        <span id="currentYear"></span> Date Fix With Her
+        <br />
+        All rights reserved | Unauthorized replication is a no-no 🚫
+      </p>
+    </footer>
+    <script>
+      document.getElementById("currentYear").textContent =
+        new Date().getFullYear();
     </script>
   </body>
 </html>
